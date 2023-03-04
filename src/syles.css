@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&display=swap");
+
+body {
+  font-family: "Montserrat", Verdana, sans-serif;
+  color: rgb(33, 37, 41);
+}
+h1 {
+  margin: 15% 1% 5% 1%;
+}
+h2 {
+  margin-bottom: 15%;
+}
+p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+.row {
+  margin: 15% 0;
+}
+.col {
+  margin: 1%;
+  padding: 15px 1px;
+}
+.temp-letter {
+  font-weight: 400;
+  text-decoration: none;
+}
+.temp-letter:hover {
+  cursor: pointer;
+  color: rgb(13, 110, 253);
+  font-weight: 600;
+  transition: all ease 0.02;
+}
