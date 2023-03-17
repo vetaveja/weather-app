@@ -21,26 +21,28 @@ let myCity = document.querySelector("#my-city");
 let locationInput = document.querySelector("#location-input");
 let myCityConditions = document.querySelector("#weather-conditions");
 let myWeatherFeels = document.querySelector("#weather-feels");
-let weatherForecast = document.querySelector("#weather-forecast");
-let apiKey = "cef48a792630af87b35b111e3f85bd9c";
+let humidity = document.querySelector("#weather-humidity");
+let pressure = document.querySelector("#weather-pressure");
+let currentWeatherIcon = document.querySelector("#current-weather-icon");
+let apiKey = "4f0e069tba9bdef6f3505aa3023cc7o5";
 
 function weatherConditions(response) {
-  myCity.innerHTML = response.data.name.toUpperCase();
-  cityTemp.innerHTML = Math.round(response.data.main.temp);
-  myCityConditions.innerHTML = response.data.weather[0].main;
+  myCity.innerHTML = response.data.city.toUpperCase();
+  cityTemp.innerHTML = Math.round(response.data.temperature.current);
+  myCityConditions.innerHTML = response.data.condition.description;
   myWeatherFeels.innerHTML = `Feels like ${Math.round(
-    response.data.main.feels_like
+    response.data.temperature.feels_like
   )}°`;
-  weatherForecast.innerHTML = `H: ${Math.round(
-    response.data.main.temp_max
-  )}° | L: ${Math.round(response.data.main.temp_min)}°`;
+  humidity.innerHTML = `Humidity: ${response.data.temperature.humidity}%`;
+  pressure.innerHTML = `Pressure: ${response.data.temperature.pressure} hPa`;
+  currentWeatherIcon.src = response.data.condition.icon_url;
 }
 
 //search form
 function searchFormSubmit(event) {
   event.preventDefault();
   let cityName = locationInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(weatherConditions);
 }
@@ -52,7 +54,7 @@ searchForm.addEventListener("submit", searchFormSubmit);
 function handlePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric `;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric `;
 
   axios.get(apiUrl).then(weatherConditions);
 }

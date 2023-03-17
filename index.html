@@ -15,7 +15,7 @@
       src="https://kit.fontawesome.com/b5afa0f5ee.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -33,21 +33,22 @@
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
-      <div class="d-grid gap-2 col-6 mx-auto">
+      <div class="d-grid gap-2 mx-auto">
         <button class="btn btn-primary" type="button" id="current">
           Search current location weather
         </button>
       </div>
-      <h1 class="" id="my-city">KYIV</h1>
+      <h1 class="my-city" id="my-city">KYIV</h1>
       <h2 class="">
-        <i class="fa-solid fa-cloud-showers-heavy"></i>
+        <img class="weather-icon" id="current-weather-icon" src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png" alt="">
         <span id="temperature" class="temperature">2</span>°C
         <!--<a id="clesius" class="temp-letter" href="#">C</a> |
         <a id="farengheit" class="temp-letter" href="#">F</a>-->
       </h2>
       <p class="weather-conditions" id="weather-conditions">Thunderstorms</p>
-      <p class="weather-feels" id="weather-feels">Feels like -2°</p>
-      <p class="weather-forecast" id="weather-forecast">H: 3° | L: 0°</p>
+      <p class="weather-conditions" id="weather-feels">Feels like -2°</p>
+      <p class="weather-conditions" id="weather-humidity">Humidity: 10%</p>
+      <p class="weather-conditions" id="weather-pressure">Pressure: 10 hPa</p>
       <div class="row">
         <div class="col">
           <h3>FEB 13</h3>

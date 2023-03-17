@@ -32,3 +32,12 @@ p {
   font-weight: 600;
   transition: all ease 0.02;
 }
+
+h1#my-city {
+  margin: 5% 0;
+}
+
+h3#current-date {
+  margin: 5% 0;
+  color:red;
+}
