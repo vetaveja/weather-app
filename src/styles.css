@@ -3,6 +3,8 @@
 body {
   font-family: "Montserrat", Verdana, sans-serif;
   color: rgb(33, 37, 41);
+  max-width: 500px;
+  margin: 0 auto;
 }
 h1 {
   margin: 15% 1% 5% 1%;
