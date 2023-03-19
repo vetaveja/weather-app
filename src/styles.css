@@ -23,13 +23,15 @@ p {
   font-weight: 400;
   text-decoration: none;
 }
-.temp-letter:hover {
+.a:hover {
   cursor: pointer;
-  color: rgb(13, 110, 253);
-  font-weight: 600;
-  transition: all ease 0.02;
 }
 
 h3#current-date {
   margin: 2% 0;
+}
+
+a.active {
+  color: rgb(33, 37, 41);
+  cursor: default;
 }

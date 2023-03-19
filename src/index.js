@@ -27,8 +27,9 @@ let currentWeatherIcon = document.querySelector("#current-weather-icon");
 let apiKey = "4f0e069tba9bdef6f3505aa3023cc7o5";
 
 function weatherConditions(response) {
+  celsius = response.data.temperature.current;
   myCity.innerHTML = response.data.city.toUpperCase();
-  cityTemp.innerHTML = Math.round(response.data.temperature.current);
+  cityTemp.innerHTML = Math.round(celsius);
   myCityConditions.innerHTML = response.data.condition.description;
   myWeatherFeels.innerHTML = `Feels like ${Math.round(
     response.data.temperature.feels_like
@@ -65,3 +66,28 @@ function currentTemp() {
 
 let currentBtn = document.querySelector("#current");
 currentBtn.addEventListener("click", currentTemp);
+
+
+let celsius = null;
+
+function showFarengheit(event) {
+  event.preventDefault();
+  let farengheit = (celsius * 1.8) + 32;
+  cityTemp.innerHTML = Math.round(farengheit);
+  farengheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  cityTemp.innerHTML = Math.round(celsius);
+  celsiusLink.classList.add("active");
+  farengheitLink.classList.remove("active");
+}
+
+
+let farengheitLink = document.querySelector("#farengheit");
+farengheitLink.addEventListener("click", showFarengheit);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", showCelsius);
