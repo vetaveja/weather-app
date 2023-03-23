@@ -1,13 +1,15 @@
-let currentDate = document.querySelector("#current-date");
-let date = new Date();
-let days = [
-  "Monday",
+
+  let currentDate = document.querySelector("#current-date");
+  let date = new Date();
+  let days = [
+    
+    "Sunday",
+    "Monday",
   "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday",
-  "Sunday"
+  "Saturday"
 ];
 let day = days[date.getDay()];
 let hour = date.getHours();
@@ -15,6 +17,33 @@ let minutes = date.getMinutes();
 currentDate.innerHTML = `${day}, ${String(hour).padStart(2, "0")}:${String(
   minutes
 ).padStart(2, "0")}`;
+
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response){
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#weather-forecast");
+  let forecastHTML = forecastElement.innerHTML;
+  
+  forecast.forEach(function(forecastDay){
+    forecastHTML = forecastHTML + `
+  <div class="col-2">
+    <h3>${formatDay(forecastDay.time)}</h3>
+    <img class="weather-icon weather-icon--forecast" src="${forecastDay.condition.icon_url}" alt="${forecastDay.condition.icon}"/>
+    <p class="weather-forecast">${forecastDay.temperature.minimum}° | ${forecastDay.temperature.maximum}°</p>
+  </div>
+  `;
+  });
+  
+  forecastElement.innerHTML = forecastHTML;
+}
 
 let cityTemp = document.querySelector("#temperature");
 let myCity = document.querySelector("#my-city");
@@ -44,8 +73,9 @@ function searchFormSubmit(event) {
   event.preventDefault();
   let cityName = locationInput.value;
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
-
+  let apiForecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${cityName}&key=${apiKey}&units=metric`
   axios.get(apiUrl).then(weatherConditions);
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 
 let searchForm = document.querySelector("#search-form");
@@ -56,8 +86,9 @@ function handlePosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric `;
-
+  let apiForecastUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric `;
   axios.get(apiUrl).then(weatherConditions);
+  axios.get(apiForecastUrl).then(displayForecast);
 }
 
 function currentTemp() {
