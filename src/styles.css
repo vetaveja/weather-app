@@ -10,7 +10,7 @@ h1 {
   margin: 5% 1% .5rem;
 }
 p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   margin: 0;
 }
@@ -37,15 +37,39 @@ a.active {
   color: rgb(33, 37, 41);
   cursor: default;
 }
-
+.forecast-line {
+  width: 100%;
+  
+  
+}
+.forecast-line .row {
+  margin: 1% 0;
+  border: 1px gray solid;
+  border-radius: var(--bs-border-radius);
+}
+.forecast-line .row .col {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 .weather-icon--forecast {
-  margin: 3%;
+  margin: 0;
+  max-width: 45px;
+}
+.forecast-line-header {
+  font-size: 20px;
+  line-height: 3;
+  text-align: left;
+  padding-left: calc(var(--bs-gutter-x) * .5);
+}
+.weather-forecast {
+  line-height: 4.2;
+  text-align: right;
 }
 
 #search-form {
   margin-bottom: .5rem;
 }
 
-.weather-icon--forecast {
-  max-width: 100%;
-}
+
+

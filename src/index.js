@@ -22,7 +22,7 @@ currentDate.innerHTML = `${day}, ${String(hour).padStart(2, "0")}:${String(
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   return days[day];
 }
@@ -32,14 +32,22 @@ function displayForecast(response){
   let forecastElement = document.querySelector("#weather-forecast");
   let forecastHTML = forecastElement.innerHTML;
   
+  
   forecast.forEach(function(forecastDay){
-    forecastHTML = forecastHTML + `
-  <div class="col-2">
-    <h3>${formatDay(forecastDay.time)}</h3>
-    <img class="weather-icon weather-icon--forecast" src="${forecastDay.condition.icon_url}" alt="${forecastDay.condition.icon}"/>
-    <p class="weather-forecast">${forecastDay.temperature.minimum}° | ${forecastDay.temperature.maximum}°</p>
-  </div>
-  `;
+    forecastHTML = forecastHTML + 
+    ` <div class="forecast-line">
+        <div class="row">
+          <div class="col">
+            <h3 class="forecast-line-header">${formatDay(forecastDay.time)}</h3>
+          </div>
+          <div class="col">
+            <img class="weather-icon weather-icon--forecast" src="${forecastDay.condition.icon_url}" alt="${forecastDay.condition.icon}"/>
+          </div>
+          <div class="col-6">
+            <p class="weather-forecast">Min: ${Math.round(forecastDay.temperature.minimum)}° | Max: ${Math.round(forecastDay.temperature.maximum)}°</p>
+          </div>
+        </div>
+      </div>`;
   });
   
   forecastElement.innerHTML = forecastHTML;
