@@ -28,7 +28,7 @@ function formatDay(timestamp) {
 function displayForecast(response){
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
-  let forecastHTML = forecastElement.innerHTML;
+  let forecastHTML = "";
   
   
   forecast.forEach(function(forecastDay, index){
@@ -60,6 +60,7 @@ let myCityConditions = document.querySelector("#weather-conditions");
 let myWeatherFeels = document.querySelector("#weather-feels");
 let humidity = document.querySelector("#weather-humidity");
 let pressure = document.querySelector("#weather-pressure");
+let wind = document.querySelector("#weather-wind");
 let currentWeatherIcon = document.querySelector("#current-weather-icon");
 let apiKey = "4f0e069tba9bdef6f3505aa3023cc7o5";
 
@@ -78,6 +79,7 @@ function displayTemperature(response) {
   )}°`;
   humidity.innerHTML = `Humidity: ${response.data.temperature.humidity}%`;
   pressure.innerHTML = `Pressure: ${response.data.temperature.pressure} hPa`;
+  wind.innerHTML = `Wind speed: ${response.data.wind.speed} km/h`;
   currentWeatherIcon.src = response.data.condition.icon_url;
 
   getForecast(response.data.city);
@@ -85,15 +87,20 @@ function displayTemperature(response) {
 
 
 //search form
-function searchFormSubmit(event) {
-  event.preventDefault();
-  let cityName = locationInput.value;
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
+function searchFormSubmit(city) {
+  
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityName = locationInput.value;
+  searchFormSubmit(cityName);
+}
+
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchFormSubmit);
+searchForm.addEventListener("submit", handleSubmit);
 
 
 //current position
@@ -111,7 +118,7 @@ function currentTemp() {
 let currentBtn = document.querySelector("#current");
 currentBtn.addEventListener("click", currentTemp);
 
-
+searchFormSubmit("London");
 
 // let celsius = null;
 

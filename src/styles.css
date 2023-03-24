@@ -6,6 +6,7 @@ body {
   max-width: 500px;
   margin: 0 auto;
   background-image: url("https://images.unsplash.com/photo-1496450681664-3df85efbd29f");
+  text-transform: capitalize;
 }
 h1 {
   margin: 5% 1% .5rem;
